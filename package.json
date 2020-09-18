@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Edgewords WebdriverJS course",
   "main": "HelloWorld.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eggz128/NQCDemo.git"
+  },
   "scripts": {
     "test": "mocha"
   },
