@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="0.3200" tests="2" failures="0" skipped="1">
+  <testsuite name="Root Suite" timestamp="2020-09-16T12:02:40" tests="0" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="My first test suite" timestamp="2020-09-16T12:02:40" tests="2" file="C:\Users\edgewords\Documents\NQCWebdriverJS\test\firstMochaTest.js" time="0.3200" failures="0">
+    <testcase name="My first test suite Our first test" time="0.3200" classname="Our first test">
+    </testcase>
+  </testsuite>
+</testsuites>
