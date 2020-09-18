@@ -55,7 +55,6 @@ describe('Default Suite', function() {
     await driver.findElement(By.linkText("Home")).click()
   })
   it('NavigateAddDeleteCap', async function() {
-    // Test name: NavigateAddDeleteCap
     // Step # | name | target | value
     // 1 | open | /demo-site/ | 
     await driver.get("https://www.edgewordstraining.co.uk/demo-site/")
@@ -76,3 +75,6 @@ describe('Default Suite', function() {
     await driver.findElement(By.linkText("Home")).click()
   })
 })
+
+
+//added
