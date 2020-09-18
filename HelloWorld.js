@@ -65,7 +65,7 @@ async function test() {
     await driver.findElement(By.linkText("View cart")).click()
     // 8 | click | linkText=× | 
     await driver.findElement(By.linkText("×")).click()
-    // 9 | click | linkText=Return to shop | 
+    // 9 | click | linkText=Return to shop | Modify this line
 
     //await driver.sleep(10000);
 
@@ -75,7 +75,6 @@ async function test() {
 
 
     await returntoshopbutton.click()
-    // 10 | click | linkText=Home | 
     await driver.findElement(By.linkText("Home")).click()
 
     await driver.close();
@@ -85,4 +84,4 @@ async function test() {
 
 test();
 
-
+//Added a comment
