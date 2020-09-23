@@ -5,7 +5,7 @@ require('chromedriver')
 
 let homePage = require('../pom/homePOM.js')
 let searchPage = require('../pom/searchResultsPOM.js')
-let mylib = require('../MYFunctionLib')
+let mylib = require('../libs/MyFunctionLib.js')
 
 
 describe('Default Suite', function() {

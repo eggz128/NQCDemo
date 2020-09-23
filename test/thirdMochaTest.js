@@ -1,20 +1,26 @@
-const { Builder, By, Key, until } = require('selenium-webdriver');
+const { Builder, By, Key, until, WebDriver } = require('selenium-webdriver');
 const chai = require('chai');
 const assert = chai.assert;
 
-//If the suite/tests were exported from SelIDE you will need to add the line below
 require('chromedriver');
 
-//Test suite
-describe("My first test suite", function () {
+// Get my function library from one folder up from this file, then down in to "libs" then the file
+let myLib = require("../libs/MyFunctionLib.js")
 
-    //this.timeout(0); //Uncomment to disable timeouts
+//Test suite
+describe("My first test suite but with waits from library", function () {
+
+    //this.timeout(0); //Uncomment to disable timeouts, or add it to .mocharc conf file
+
+    /** @type {WebDriver} */
     let driver
 
     //Setup and teardown hooks
     before(async function () {
         driver = await new Builder().forBrowser('chrome').build();
         await driver.get("https://www.edgewordstraining.co.uk/demo-site/")
+
+
     })
 
     after(async function () {
@@ -23,19 +29,22 @@ describe("My first test suite", function () {
 
 
     //First test
-    it("is an exported SelIDE test", async function () {
+    it("waits with a library", async function () {
         /*
-        Exported from SeleniumIDE, we are likely to run in to synchronisation problems
-        particularly if there are any AJAX events (html dynamically inserted in to the page)
-        and often just navigating between pages
+            Start using function libraries for repetitive waits
         */
 
         // Test name: AddDeleteCap
         // Step # | name | target | value
         // 1 | open | /demo-site/ | 
         await driver.get("https://www.edgewordstraining.co.uk/demo-site/")
+
+        //Check we are on the right page
+        let pageTitle = await driver.getTitle();
+        assert.equal(pageTitle, "Edgewords Shop – e-commerce demo site for Training", "We are not on the demo shop page")
+
         // 2 | setWindowSize | 1207x1032 | 
-        await driver.manage().window().setRect(1207, 1032)
+        // await driver.manage().window().setRect(1207, 1032)
         // 3 | click | id=woocommerce-product-search-field-0 | 
         await driver.findElement(By.id("woocommerce-product-search-field-0")).click()
         // 4 | type | id=woocommerce-product-search-field-0 | cap
@@ -49,9 +58,23 @@ describe("My first test suite", function () {
         // 8 | click | linkText=× | 
         await driver.findElement(By.linkText("×")).click() //Becareful: that "×" is not an "x"
         // 9 | click | linkText=Return to shop | 
-        await driver.findElement(By.linkText("Return to shop")).click() //Fails around here when timeouts disabled. Sync problem.
+
+        //Waits using library
+        let returnButton = await myLib.waitForElementVisible(driver, By.linkText("Return to shop"),5000)
+        //await myLib.waitForElementVisible(driver, By.linkText("Return to shop"), 5000)
+        returnButton.click();
+        
+
         // 10 | click | linkText=Home | 
+        await myLib.waitForElementVisible(driver, By.xpath("//h1[contains(.,'Shop')]"), 5000 )
+        
         await driver.findElement(By.linkText("Home")).click()
+
+        //And done!
+        //Well nearly - lets finish with an assert to check the cart is empty
+        let cartText = await driver.findElement(By.css('a.cart-contents span.count')).getText()
+        assert.equal(cartText, "0 items", "Cart is not empty!")
+
     })
 
     //Second test

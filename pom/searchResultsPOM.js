@@ -1,5 +1,5 @@
 const { Builder, By, Key, until } = require('selenium-webdriver')
-let mylib = require('../MYFunctionLib.js')
+let mylib = require('../libs/MyFunctionLib.js')
 
 module.exports = {
     addToCartButton: By.name("add-to-cart"),
